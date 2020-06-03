@@ -1,7 +1,0 @@
-To import Book data into your mongoDB database. Make sure MongoDB is running then run 'mongo bookAPI < booksJson.js' from the command line
-for Mac and Linux.
-
-For Windows, type 'mongo localhost:27017/persona4API_Prod itemsJson.js' OR
-'mongo localhost:27017/persona4API_Test itemsJson.js' if you're adding to the test database
-
-mongo localhost:27017/persona4API_Prod personaJson.js
