@@ -1,0 +1,56 @@
+db.personas.insert([
+  {
+    name: 'Test Persona',
+    arcana: 'Chariot',
+    level: 41,
+    strength: 15,
+    magic: 20,
+    endurance: 20,
+    agility: 12,
+    luck: 12,
+    physical: '-',
+    fire: '-',
+    ice: '-',
+    electric: '-',
+    wind: '-',
+    light: '-',
+    dark: '-',
+    skills: [
+      {
+        skill: ObjectId('5ebda108a33b7a5f00b6b655'),
+        learnedAtLevel: 24,
+      },
+      {
+        skill: ObjectId('5ebda108a33b7a5f00b6b656'),
+        learnedAtLevel: 35,
+      },
+    ],
+  },
+  {
+    name: 'Second Test Persona',
+    arcana: 'Magician',
+    level: 30,
+    strength: 12,
+    magic: 12,
+    endurance: 4,
+    agility: 2,
+    luck: 5,
+    physical: '-',
+    fire: '-',
+    ice: '-',
+    electric: '-',
+    wind: '-',
+    light: 'wk',
+    dark: 'wk',
+    skills: [
+      {
+        skill: ObjectId('5ebda108a33b7a5f00b6b655'),
+        learnedAtLevel: 12,
+      },
+      {
+        skill: ObjectId('5ebda108a33b7a5f00b6b656'),
+        learnedAtLevel: 14,
+      },
+    ],
+  },
+]);

@@ -1,0 +1,57 @@
+require('should');
+
+const request = require('supertest');
+const mongoose = require('mongoose');
+
+process.env.ENV = 'test';
+
+const app = require('../app.js');
+
+const Persona = mongoose.model('Persona');
+const agent = request.agent(app);
+
+describe('Persona CRUD Tests', () => {
+  it('Should return all personas in the database (/personas GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should successfully add a new Persona to the database (POST Request)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should get all Personas that start at the given starting level (/personas/level/:startingLevel GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas with the given weakness (/personas/weakness/:weaknessType GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas with that drain the given type (/personas/drain/:drainType GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas that nullify the given type (/personas/null/:nullType GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas that repel the given type (/personas/repel/:repelType GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas that are strong against the given type (/personas/strong/:strongType GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas of the given Arcana (/personas/arcana/:arcanaName GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas that can learn the skill with the given name (/personas/skill/:skillName GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+
+  it('Should return all personas that have the given prefix in their name (/personas/:name GET)', (done) => {
+    throw new Error('Must be implemented');
+  });
+});
