@@ -4,11 +4,6 @@ function personasController(Persona) {
 
   }
 
-  /* TODO: Implement a post request (/api/personas URI) that adds a new persona to the database */
-  function post(req, res) {
-
-  }
-
   /* TODO: Implement a get request (/api/personas/level/:startingLevel URI) that gets all personas
   that start at the given level */
   function getByStartingLevel(req, res) {
@@ -45,14 +40,14 @@ function personasController(Persona) {
 
   }
 
-  /* TODO: Imeplement a get request (/api/personas/arcana/:arcanaName URI) that
+  /* TODO: Implement a get request (/api/personas/arcana/:arcanaName URI) that
   returns all the personas that are of the given arcana */
   function getByArcana(req, res) {
 
   }
 
   /* TODO: Implement a get request (/api/personas/skill/:skillName URI) that returns
-  all the skills a persona can learn or knows by default */
+  all the personas that learn the skill with the given prefix/name */
   function getByKnownSkill(req, res) {
 
   }
@@ -65,7 +60,7 @@ function personasController(Persona) {
 
   return {
     // eslint-disable-next-line max-len
-    get, post, getByStartingLevel, getByWeakness, getByDrain, getByNullifiedType, getByRepelledType, getByStrongType, getByArcana, getByKnownSkill, getByNamePrefix,
+    get, getByStartingLevel, getByWeakness, getByDrain, getByNullifiedType, getByRepelledType, getByStrongType, getByArcana, getByKnownSkill, getByNamePrefix,
   };
 }
 

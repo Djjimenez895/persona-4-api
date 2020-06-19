@@ -5,12 +5,6 @@ function armorController(Armor) {
 
   }
 
-  /* TODO: Implement a post request (/api/armor URI) that returns all
-  armor in the database */
-  function post(req, res) {
-
-  }
-
   /* TODO: Implement a get request (/api/armor/effect/:effectType/:amount URI)
   that gets all armor with a specific effect type and a specific amount
   for that effect type */
@@ -56,7 +50,7 @@ function armorController(Armor) {
 
   return {
     // eslint-disable-next-line max-len
-    get, post, getByEffectTypeAndAmount, getByEffectType, getByDefense, getByEvasion, getByPrice, getByCharacterName, getByArmorPrefix,
+    get, getByEffectTypeAndAmount, getByEffectType, getByDefense, getByEvasion, getByPrice, getByCharacterName, getByArmorPrefix,
   };
 }
 

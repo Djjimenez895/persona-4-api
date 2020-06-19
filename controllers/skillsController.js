@@ -19,11 +19,6 @@ function skillsController(Skill) {
     });
   }
 
-  /* TODO: Implement a post request (/api/skills URI) that adds a skill to the database */
-  function post(req, res) {
-
-  }
-
   /* TODO: Implement a get request (/api/skills/cost/hp URI) that returns
   all skills that cost hp */
   function getByResourceCostTypeHp(req, res) {
@@ -37,7 +32,7 @@ function skillsController(Skill) {
   }
 
   /* TODO: Implement a get request (/api/skills/type/:skillType URI) that
-  returns all skills of the given type (i.e., all ice move) */
+  returns all skills of the given type (i.e., all ice moves) */
   function getBySkillType(req, res) {
 
   }
@@ -68,7 +63,7 @@ function skillsController(Skill) {
 
   return {
     // eslint-disable-next-line max-len
-    get, post, getByResourceCostTypeHp, getByResourceCostTypeSp, getBySkillType, getBySkillName, getByPower, getByAccuracy, getByCriticalChance,
+    get, getByResourceCostTypeHp, getByResourceCostTypeSp, getBySkillType, getBySkillName, getByPower, getByAccuracy, getByCriticalChance,
   };
 }
 

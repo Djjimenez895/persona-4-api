@@ -5,12 +5,6 @@ function accessoriesController(Accessory) {
 
   }
 
-  /* TODO: Implement a post request (/api/accessories URI) that adds a new accessory 
-  to the database */
-  function post(req, res) {
-
-  }
-
   /* TODO: Implement a get request (/api/accessories/effect/:effectType/:amount URI) that gets
   all accessories with a specified effect type and a specific amount for
   that effect type (i.e., strength +1, luck +3, etc.) */
@@ -37,7 +31,7 @@ function accessoriesController(Accessory) {
   }
 
   return {
-    get, post, getByEffectTypeAndAmount, getByEffectType, getByPrice, getByAccessoryPrefix,
+    get, getByEffectTypeAndAmount, getByEffectType, getByPrice, getByAccessoryPrefix,
   };
 }
 

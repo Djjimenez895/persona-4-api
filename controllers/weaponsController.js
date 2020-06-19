@@ -16,11 +16,6 @@ function weaponsController(Weapon) {
     });
   }
 
-  /* TODO: Implement a post request (/api/weapons URI) that adds a new weapon to the database */
-  function post(req, res) {
-
-  }
-
   /* TODO: Implement a get request (/api/weapons/effect/:effectType URI) that returns all weapons
   that have the effect type passed as an argument (i.e., strength, luck, agility, etc.) */
   function getByEffectType(req, res) {
@@ -60,7 +55,7 @@ function weaponsController(Weapon) {
 
   return {
     // eslint-disable-next-line max-len
-    get, post, getByEffectType, getByEffectTypeAndEffectAmount, getByPrice, getByCharacterName, getByAttackPower, getByHitRate,
+    get, getByEffectType, getByEffectTypeAndEffectAmount, getByPrice, getByCharacterName, getByAttackPower, getByHitRate,
   };
 }
 
