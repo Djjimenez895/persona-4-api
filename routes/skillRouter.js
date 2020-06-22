@@ -6,7 +6,6 @@ function routes(Skill) {
   const controller = skillsController(Skill);
 
   skillRouter.route('/skills')
-    .post(controller.post)
     .get(controller.get);
 
   skillRouter.route('/skills/cost/mp')
