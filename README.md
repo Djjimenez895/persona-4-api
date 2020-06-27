@@ -20,8 +20,13 @@ Developer Environment Setup:
 5) To run, type "npm start"
 6) To run unit and integration tests, type "npm test"
 
+When issues are checked out to you, please create a separate branch that is named the same as the issue. 
+
 ## Features
 
 This API currently supports the following features: 
 
 ## Usage
+To run the program, type "npm start" in your console. Before doing this, ensure that you have setup a config.js file and have also ran "npm update". Once started, you can access the endpoints specified in the application through Postman or another program that can access REST endpoints. 
+
+To run tests for the application, type "npm test" in your console. 
