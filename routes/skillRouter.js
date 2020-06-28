@@ -8,11 +8,8 @@ function routes(Skill) {
   skillRouter.route('/skills')
     .get(controller.get);
 
-  skillRouter.route('/skills/cost/mp')
-    .get(controller.getByResourceCostTypeSp);
-
-  skillRouter.route('/skills/cost/hp')
-    .get(controller.getByResourceCostTypeHp);
+  skillRouter.route('/skills/cost/:resourceCostType')
+    .get(controller.getByResourceCostType);
 
   skillRouter.route('/skills/type/:skillType')
     .get(controller.getBySkillType);

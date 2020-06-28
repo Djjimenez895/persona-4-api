@@ -1,5 +1,21 @@
-
 function skillsController(Skill) {
+  /*
+  Uses .find to search the database given a query
+  Helps reduce code redundancy
+  */
+  function searchByQuery(query, res) {
+    Skill.find(query, (err, items) => {
+      if (err) {
+        return res.send(err);
+      }
+      const returnItems = items.map((item) => {
+        const newItem = item.toJSON();
+        return newItem;
+      });
+      return res.json(returnItems);
+    });
+  }
+
   /*
     Get request (/api/skills URI) that returns all
     skills in the database
@@ -19,16 +35,15 @@ function skillsController(Skill) {
     });
   }
 
-  /* TODO: Implement a get request (/api/skills/cost/hp URI) that returns
-  all skills that cost hp */
-  function getByResourceCostTypeHp(req, res) {
+  function getByResourceCostType(req, res) {
+    const query = {};
 
-  }
+    // This checks the parameter in the URI to determine the type of object you want to return
+    if (req.params.resourceCostType) {
+      query.resourceCostType = req.params.resourceCostType;
+    }
 
-  /* TODO: Implement a get request (/api/skills/cost/sp URI) that returns
-  all skills that cost sp */
-  function getByResourceCostTypeSp(req, res) {
-
+    searchByQuery(query, res);
   }
 
   /* TODO: Implement a get request (/api/skills/type/:skillType URI) that
@@ -63,7 +78,7 @@ function skillsController(Skill) {
 
   return {
     // eslint-disable-next-line max-len
-    get, getByResourceCostTypeHp, getByResourceCostTypeSp, getBySkillType, getBySkillName, getByPower, getByAccuracy, getByCriticalChance,
+    get, getBySkillType, getBySkillName, getByPower, getByAccuracy, getByCriticalChance, getByResourceCostType,
   };
 }
 
