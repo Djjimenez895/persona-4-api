@@ -9,7 +9,8 @@ This project requires:
 1) Node.js v12.18.1 and up
 2) Npm v6.14.5 and up
 3) User credentials for MongoDB (contact djjimenez895 for this info)
-4) Postman (Optional, needed to manually use API end points, alternatives work too)
+4) MongoDB Compass for connecting to the database
+5) Postman (Optional, needed to manually use API end points, alternatives work too)
 
 Developer Environment Setup: 
 
