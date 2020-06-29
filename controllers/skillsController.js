@@ -73,7 +73,17 @@ function skillsController(Skill) {
   /* TODO: Implement a get request (/api/skills/critical/:criticalChance URI) that returns
   all items with a critical chance >= the number given. */
   function getByCriticalChance(req, res) {
+    const critChance = req.params.criticalChance;
 
+    Skill.find((err, skills) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnSkills = skills.filter((skill) => (skill.criticalChance >= critChance))
+        .map((critItem) => critItem.toJSON());
+      return res.json(returnSkills);
+    });
   }
 
   return {
