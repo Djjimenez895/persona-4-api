@@ -70,8 +70,9 @@ function skillsController(Skill) {
 
   }
 
-  /* TODO: Implement a get request (/api/skills/critical/:criticalChance URI) that returns
-  all items with a critical chance >= the number given. */
+  /* This function finds all skills with a critical chance >= the number given
+     in the request params. This function is used for the URI /api/skills/critical/:criticalChance.
+  */
   function getByCriticalChance(req, res) {
     const critChance = req.params.criticalChance;
 
