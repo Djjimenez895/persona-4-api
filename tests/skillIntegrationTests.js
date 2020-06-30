@@ -40,7 +40,23 @@ describe('Skill CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return skills with a critical chance >= the one given (/api/skills/critical/:criticalChance GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return all skills in the database (/api/skills/critical/:criticalChance GET) ', (done) => {
+    agent.get('/api/skills/critical/0') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.length.should.be.above(0); // Should get something back
+        done();
+      });
+  });
+
+  it('Should return skills with a critical chance >= 10 (/api/skills/critical/:criticalChance GET) ', (done) => {
+    agent.get('/api/skills/critical/10')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('criticalChance').above(9);
+        });
+        done();
+      });
   });
 });
