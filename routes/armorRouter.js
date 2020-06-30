@@ -6,8 +6,7 @@ function routes(Armor) {
   const controller = armorController(Armor);
 
   armorRouter.route('/armor')
-    .get(controller.get)
-    .post(controller.post);
+    .get(controller.get);
 
   armorRouter.route('/armor/effect/:effectType/:amount')
     .get(controller.getByEffectTypeAndAmount);

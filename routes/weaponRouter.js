@@ -6,8 +6,7 @@ function routes(Weapon) {
   const controller = weaponsController(Weapon);
 
   weaponRouter.route('/weapons')
-    .get(controller.get)
-    .post(controller.post);
+    .get(controller.get);
 
   // Check if you can ping this
   weaponRouter.route('/weapons/effect/:effecType/:amount')

@@ -19,20 +19,32 @@ if (process.env.ENV === 'Test') {
 
 const port = process.env.PORT || 3000;
 
-// TODO: require models here
+// Models
 const Item = require('./models/itemModel');
 const Skill = require('./models/skillModel');
+const Accessory = require('./models/accessoryModel');
+const Armor = require('./models/armorModel');
+const Persona = require('./models/personaModel');
+const Weapon = require('./models/weaponModel');
 
-// TODO: Require routers here as well
+// Routers
 const itemRouter = require('./routes/itemRouter')(Item);
 const skillRouter = require('./routes/skillRouter')(Skill);
+const accessoryRouter = require('./routes/accessoryRouter')(Accessory);
+const armorRouter = require('./routes/armorRouter')(Armor);
+const personaRouter = require('./routes/personaRouter')(Persona);
+const weaponRouter = require('./routes/weaponRouter')(Weapon);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// TODO: add routers here after they're made
+// Add routers to the '/api' end point
 app.use('/api', itemRouter);
 app.use('/api', skillRouter);
+app.use('/api', accessoryRouter);
+app.use('./api', armorRouter);
+app.use('./api', personaRouter);
+app.use('./api', weaponRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Persona 4 API!');

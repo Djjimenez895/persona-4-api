@@ -6,8 +6,7 @@ function routes(Accessory) {
   const controller = accessoriesController(Accessory);
 
   accessoryRouter.route('/accessories')
-    .get(controller.get)
-    .post(controller.post);
+    .get(controller.get);
 
   // Make sure you can ping this end point
   accessoryRouter.route('/accessories/effect/:effectType/:amount')

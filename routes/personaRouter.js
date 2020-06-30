@@ -6,8 +6,7 @@ function routes(Persona) {
   const controller = personasController(Persona);
 
   personaRouter.route('/personas')
-    .get(controller.get)
-    .post(controller.post);
+    .get(controller.get);
 
   personaRouter.route('/personas/level/:startingLevel')
     .get(controller.getByStartingLevel);
