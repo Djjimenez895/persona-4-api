@@ -20,11 +20,7 @@ describe('Skill CRUD Tests', () => {
       });
   });
 
-  it('Should return skills that cost mp (/api/skills/cost/mp GET) ', (done) => {
-    throw new Error('Needs to be implemented');
-  });
-
-  it('Should return skills that cost hp (/api/skills/cost/hp GET) ', (done) => {
+  it('Should return skills that cost mp (/api/skills/cost/:resourceCostType GET) ', (done) => {
     throw new Error('Needs to be implemented');
   });
 
