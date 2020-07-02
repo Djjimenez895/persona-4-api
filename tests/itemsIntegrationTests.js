@@ -75,8 +75,8 @@ describe('Item CRUD Tests', () => {
     throw new Error('Must be implemented');
   });
 
-  after((done) => { // run once all the tests are complete
-    mongoose.connection.close();
-    app.server.close(done());
-  });
+  // after((done) => { // run once all the tests are complete
+  //   mongoose.connection.close();
+  //   app.server.close(done());
+  // }); // Application shouldn't close after these specific tests because other tests from other files might need to be ran as well
 });

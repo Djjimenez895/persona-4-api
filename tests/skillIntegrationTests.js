@@ -59,4 +59,13 @@ describe('Skill CRUD Tests', () => {
         done();
       });
   });
+
+  it('Should return an empty array (/api/skills/critical/:criticalChance GET) ', (done) => {
+    agent.get('/api/skills/critical/returnEmpty')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
+  });
 });
