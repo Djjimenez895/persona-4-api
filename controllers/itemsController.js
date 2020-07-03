@@ -1,4 +1,3 @@
-
 function itemsController(Item) {
   /*
   Uses .find to search the database given a query

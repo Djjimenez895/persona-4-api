@@ -24,8 +24,35 @@ describe('Skill CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return skills that cost hp (/api/skills/type/:skillType GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return all wind skills (/api/skills/type/:skillType GET) ', (done) => {
+    agent.get('/api/skills/type/wind')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('skillType').equal('wind');
+        });
+        done();
+      });
+  });
+
+  it('Should return all electric skills (/api/skills/type/:skillType GET) ', (done) => {
+    agent.get('/api/skills/type/electric')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('skillType').equal('electric');
+        });
+        done();
+      });
+  });
+
+  it('Should return zero skills (/api/skills/type/:skillType GET) ', (done) => {
+    agent.get('/api/skills/type/test-for-no-skill-output')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 
   it('Should return skills with the given prefix in their skill name (/api/skills/name/:skillName GET) ', (done) => {

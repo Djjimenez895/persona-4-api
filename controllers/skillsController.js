@@ -49,7 +49,18 @@ function skillsController(Skill) {
   /* TODO: Implement a get request (/api/skills/type/:skillType URI) that
   returns all skills of the given type (i.e., all ice moves) */
   function getBySkillType(req, res) {
+    const requestedSkillType = req.params.skillType;
 
+    Skill.find((err, skills) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnSkills = skills.filter((skill) => (skill.skillType === requestedSkillType))
+        .map((requestedSkill) => requestedSkill.toJSON());
+      return res.json(returnSkills);
+    });
   }
 
   /* TODO: Implement a get request (/api/skills/name/:skillName URI) that
