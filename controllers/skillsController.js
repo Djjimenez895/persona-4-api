@@ -79,7 +79,17 @@ function skillsController(Skill) {
   /* TODO: Implement a get request (/api/skills/accuracy/:accuracyLevel URI)
   that returns all items with an accuracy >= the number given */
   function getByAccuracy(req, res) {
+    const requestedAccuracy = req.params.accuracyLevel;
 
+    Skill.find((err, skills) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnSkills = skills.filter((skill) => (skill.accuracy >= requestedAccuracy))
+        .map((accurateSkill) => accurateSkill.toJSON());
+      return res.json(returnSkills);
+    });
   }
 
   /* This function finds all skills with a critical chance >= the number given
