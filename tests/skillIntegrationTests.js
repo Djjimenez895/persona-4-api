@@ -63,8 +63,33 @@ describe('Skill CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return skills with an accuracy >= the one given (/api/skills/accuracy/:accuracyLevel GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return skills with an accuracy >= 1 (so every skill at the moment) (/api/skills/accuracy/:accuracyLevel GET) ', (done) => {
+    agent.get('/api/skills/accuracy/1') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.length.should.be.above(0); // Should get something back
+        done();
+      });
+  });
+
+  it('Should not return any skills (/api/skills/accuracy/:accuracyLevel GET) ', (done) => {
+    agent.get('/api/skills/accuracy/test-for-no-output') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
+  });
+
+  it('Should return skills with an accuracy >= 95 (so every skill at the moment) (/api/skills/accuracy/:accuracyLevel GET) ', (done) => {
+    agent.get('/api/skills/accuracy/95') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('accuracy').above(94);
+        });
+        done();
+      });
   });
 
   it('Should return all skills in the database (/api/skills/critical/:criticalChance GET) ', (done) => {
