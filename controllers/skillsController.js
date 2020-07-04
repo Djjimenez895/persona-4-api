@@ -76,8 +76,8 @@ function skillsController(Skill) {
 
   }
 
-  /* TODO: Implement a get request (/api/skills/accuracy/:accuracyLevel URI)
-  that returns all items with an accuracy >= the number given */
+  /* Returns all skills with an accuracy >= the number given
+  (/api/skills/accuracy/:accuracyLevel URI) */
   function getByAccuracy(req, res) {
     const requestedAccuracy = req.params.accuracyLevel;
 
