@@ -70,10 +70,19 @@ function skillsController(Skill) {
 
   }
 
-  /* TODO: Implement a get request (/api/skills/power/:powerLevel URI) that
-  returns all items with a power >= the number given */
+  /* returns all skills with a power >= the number given (/api/skills/power/:powerLevel URI) */
   function getByPower(req, res) {
+    const requestedPowerLevel = req.params.powerLevel;
 
+    Skill.find((err, skills) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnSkills = skills.filter((skill) => (skill.power >= requestedPowerLevel))
+        .map((powerSkill) => powerSkill.toJSON());
+      return res.json(returnSkills);
+    });
   }
 
   /* Returns all skills with an accuracy >= the number given
