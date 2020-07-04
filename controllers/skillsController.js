@@ -46,8 +46,9 @@ function skillsController(Skill) {
     searchByQuery(query, res);
   }
 
-  /* TODO: Implement a get request (/api/skills/type/:skillType URI) that
-  returns all skills of the given type (i.e., all ice moves) */
+  /* Returns all skills of the given type passed in the request parameters (i.e., all ice moves)
+     This function is used for the end point (/api/skills/type/:skillType URI)
+  */
   function getBySkillType(req, res) {
     const requestedSkillType = req.params.skillType;
 
