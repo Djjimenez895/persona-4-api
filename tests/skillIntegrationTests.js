@@ -59,8 +59,35 @@ describe('Skill CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return skills that have a power >= the given power level (/api/skills/power/:powerLevel GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return skills that have a power >= 85 (/api/skills/power/:powerLevel GET) ', (done) => {
+    agent.get('/api/skills/power/85') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('power').above(84);
+        });
+        done();
+      });
+  });
+
+  it('Should return skills that have a power >= 80 (/api/skills/power/:powerLevel GET) ', (done) => {
+    agent.get('/api/skills/power/80') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('power').above(79);
+        });
+        done();
+      });
+  });
+
+  it('Should return no skills (/api/skills/power/:powerLevel GET) ', (done) => {
+    agent.get('/api/skills/power/no-skill-return-test') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 
   it('Should return skills with an accuracy >= 1 (so every skill at the moment) (/api/skills/accuracy/:accuracyLevel GET) ', (done) => {
