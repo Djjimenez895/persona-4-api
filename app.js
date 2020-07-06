@@ -42,9 +42,9 @@ app.use(bodyParser.json());
 app.use('/api', itemRouter);
 app.use('/api', skillRouter);
 app.use('/api', accessoryRouter);
-app.use('./api', armorRouter);
-app.use('./api', personaRouter);
-app.use('./api', weaponRouter);
+app.use('/api', armorRouter);
+app.use('/api', personaRouter);
+app.use('/api', weaponRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Persona 4 API!');

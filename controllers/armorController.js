@@ -1,8 +1,27 @@
 function armorController(Armor) {
+  /*
+    Uses .find to search the DB given a query.
+    This helps reduce code redundancy.
+  */
+  function searchByQuery(query, res) {
+    Armor.find(query, (err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.map((armor) => {
+        const newArmor = armor.toJSON();
+        return newArmor;
+      });
+      return res.json(returnArmor);
+    });
+  }
+
   /* TODO: Implement a get request (/api/armor URI) that returns all
   armor in the database */
   function get(req, res) {
-
+    const query = {};
+    searchByQuery(query, res);
   }
 
   /* TODO: Implement a get request (/api/armor/effect/:effectType/:amount URI)
@@ -36,10 +55,13 @@ function armorController(Armor) {
 
   }
 
-  /* TODO: Implement a get request (/api/armor/character/:characterName URI)
-  that returns all armor related to the specific character */
+  /* Returns all armor related to the specific character passed as an
+     argument to the URI /api/armor/character/:characterName */
   function getByCharacterName(req, res) {
+    const query = {};
+    query.characterName = req.params.characterName;
 
+    searchByQuery(query, res);
   }
 
   /* TODO: Implement a get request (/api/armor/:name URI) that gets

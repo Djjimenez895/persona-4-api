@@ -11,7 +11,7 @@ const armorModel = new Schema(
     defense: { type: Number },
     evasion: { type: Number },
     price: { type: Number },
-    character: {
+    characterName: {
       type: String,
       enum: ['Yu', 'Chie', 'Yosuke', 'Yukiko', 'Teddie', 'Kanji', 'Naoto'],
       default: 'n/a',
@@ -19,4 +19,4 @@ const armorModel = new Schema(
   },
 );
 
-module.exports = mongoose.model('Armor', armorModel);
+module.exports = mongoose.model('Armor', armorModel, 'armor');

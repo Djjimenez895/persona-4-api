@@ -12,7 +12,12 @@ const agent = request.agent(app);
 
 describe('Armor CRUD Tests', () => {
   it('Should return all armor in the database (/armor GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor')
+      .expect(200)
+      .end((err, results) => {
+        results.body.length.should.be.above(0); // Ensure that information is given back
+        done();
+      });
   });
 
   it('Should return armor with the given effect type and the give amount (/armor/effect/:effectType/:amount (GET)', (done) => {
@@ -36,7 +41,23 @@ describe('Armor CRUD Tests', () => {
   });
 
   it('Should return armor for a specific character (/armor/character/:characterName GET)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor/character/Chie')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('characterName').equal('Chie');
+        });
+        done();
+      });
+  });
+
+  it('Should return no armor (/armor/character/:characterName GET)', (done) => {
+    agent.get('/api/armor/character/not-a-character')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 
   it('Should return armor that has a name with the given prefix (/armor/:prefix GET)', (done) => {
