@@ -13,7 +13,7 @@ const armorModel = new Schema(
     price: { type: Number },
     character: {
       type: String,
-      enum: ['yu', 'chie', 'yosuke', 'yukiko', 'teddie', 'kanji', 'naoto'],
+      enum: ['Yu', 'Chie', 'Yosuke', 'Yukiko', 'Teddie', 'Kanji', 'Naoto'],
       default: 'n/a',
     },
   },
