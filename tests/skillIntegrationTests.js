@@ -56,7 +56,15 @@ describe('Skill CRUD Tests', () => {
   });
 
   it('Should return skills with the given prefix in their skill name (/api/skills/name/:skillName GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/skills/name/Skill') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('name');
+          element.name.should.startWith('Skill');
+        });
+        done();
+      });
   });
 
   it('Should return skills that have a power >= 85 (/api/skills/power/:powerLevel GET) ', (done) => {

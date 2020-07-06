@@ -16,6 +16,18 @@ function skillsController(Skill) {
     });
   }
 
+  function searchBySkillNamePrefix(query, prefix, res) {
+    Skill.find(query, (err, skills) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnSkills = skills.filter((skill) => (skill.name.startsWith(prefix)))
+        .map((prefixedSkill) => prefixedSkill.toJSON());
+      return res.json(returnSkills);
+    });
+  }
+
   /*
     Get request (/api/skills URI) that returns all
     skills in the database
@@ -64,10 +76,21 @@ function skillsController(Skill) {
     });
   }
 
-  /* TODO: Implement a get request (/api/skills/name/:skillName URI) that
-  returns all skills that start with the given prefix */
+  /* returns all skills that start with the given prefix in the URI
+     /api/skills/name/:skillName */
   function getBySkillName(req, res) {
+    const query = {};
+    let name = '';
 
+    // Players can search for skills with multiple words in the name, but
+    // these skills must be entered as with '-' instead of spaces, so
+    // this code replaces the '-' with ' '
+    if (req.params.skillName) {
+      name = req.params.skillName;
+      name.replace('-', ' ');
+    }
+
+    searchBySkillNamePrefix(query, name, res);
   }
 
   /* returns all skills with a power >= the number given (/api/skills/power/:powerLevel URI) */
