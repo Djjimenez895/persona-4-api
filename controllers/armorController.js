@@ -43,10 +43,20 @@ function armorController(Armor) {
 
   }
 
-  /* TODO: Implement a get request (/api/armor/evasion/:evasionAmount URI)
-  that returns all armor with an evasion rating >= the amount given  */
+  /* Returns all armor with an evasion rating >= the amount given
+     (/api/armor/evasion/:evasionAmount URI) */
   function getByEvasion(req, res) {
+    const requestEvasionRate = req.params.evasionAmount;
 
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.evasion >= requestEvasionRate))
+        .map((evasionArmor) => evasionArmor.toJSON());
+      return res.json(returnArmor);
+    });
   }
 
   /* Returns all armor that has a cost <= the price given for the

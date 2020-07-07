@@ -32,8 +32,35 @@ describe('Armor CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return armor with evasion >= the amount given (/armor/evasion/:evasionAmount GET)', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return all armor since evasion rate given is 0 (/armor/evasion/:evasionAmount GET)', (done) => {
+    agent.get('/api/armor/evasion/0')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('evasion').above(-1);
+        });
+        done();
+      });
+  });
+
+  it('Should return armor with evasion >= 12 (/armor/evasion/:evasionAmount GET)', (done) => {
+    agent.get('/api/armor/evasion/12')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('evasion').above(11);
+        });
+        done();
+      });
+  });
+
+  it('Should return zero armor pieces (evasion is too high) (/armor/evasion/:evasionAmount GET)', (done) => {
+    agent.get('/api/armor/evasion/999999')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 
   it('Should return all armor in the database (/armor/price/:priceAmount GET)', (done) => {
