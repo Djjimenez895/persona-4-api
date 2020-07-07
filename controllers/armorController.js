@@ -49,10 +49,20 @@ function armorController(Armor) {
 
   }
 
-  /* TODO: Implement a get request (/api/armor/price/:priceAmount URI)
-  that returns all armor that has a cost <= the price given */
+  /* Returns all armor that has a cost <= the price given for the
+     /api/armor/price/:priceAmount URI */
   function getByPrice(req, res) {
+    const requestedPrice = req.params.priceAmount;
 
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.price <= requestedPrice))
+        .map((requestedArmor) => requestedArmor.toJSON());
+      return res.json(returnArmor);
+    });
   }
 
   /* Returns all armor related to the specific character passed as an

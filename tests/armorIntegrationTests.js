@@ -36,8 +36,35 @@ describe('Armor CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return armor with a price <= the price given (/armor/price/:priceAmount GET)', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return all armor in the database (/armor/price/:priceAmount GET)', (done) => {
+    agent.get('/api/armor/character/99999999')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('price').below(100000000);
+        });
+        done();
+      });
+  });
+
+  it('Should return all armor that costs 13500 or less (/armor/price/:priceAmount GET)', (done) => {
+    agent.get('/api/armor/character/13500')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('price').below(13501);
+        });
+        done();
+      });
+  });
+
+  it('Should return no armor (/armor/price/:priceAmount GET)', (done) => {
+    agent.get('/api/armor/character/0')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 
   it('Should return armor for a specific character (/armor/character/:characterName GET)', (done) => {
