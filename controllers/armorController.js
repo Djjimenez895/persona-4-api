@@ -1,3 +1,5 @@
+const itemModel = require("../models/itemModel");
+
 function armorController(Armor) {
   /*
     Uses .find to search the DB given a query.
@@ -84,10 +86,19 @@ function armorController(Armor) {
     searchByQuery(query, res);
   }
 
-  /* TODO: Implement a get request (/api/armor/:name URI) that gets
-  all armor back with that starts with the prefix given */
+  /* Returns all armor back with that starts with the prefix given (/api/armor/:prefix URI) */
   function getByArmorPrefix(req, res) {
+    const requestedPrefix = req.params.prefix;
 
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.name.startsWith(requestedPrefix)))
+        .map((prefixedArmor) => prefixedArmor.toJSON());
+      return res.json(returnArmor);
+    });
   }
 
   return {

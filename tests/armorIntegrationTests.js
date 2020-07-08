@@ -115,6 +115,23 @@ describe('Armor CRUD Tests', () => {
   });
 
   it('Should return armor that has a name with the given prefix (/armor/:prefix GET)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor/Test') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('name');
+          element.name.should.startWith('Test');
+        });
+        done();
+      });
+  });
+
+  it('Should return zero pieces of armor because none start with the given prefix (/armor/:prefix GET)', (done) => {
+    agent.get('/api/armor/no-output-test') // Should return all skills in the database
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty(); // Should be empty
+        done();
+      });
   });
 });
