@@ -39,10 +39,21 @@ function armorController(Armor) {
 
   }
 
-  /* TODO: Implement a get request (/api/armor/defense/:defenseAmount URI)
-  that returns all armor with >= the amount of defense given */
+  /* Returns all armor with defense >= the amount of defense given
+     as an argument to the URI /api/armor/defense/:defenseAmount
+  */
   function getByDefense(req, res) {
+    const requestedDefense = req.params.defenseAmount;
 
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.defense >= requestedDefense))
+        .map((defenseArmor) => defenseArmor.toJSON());
+      return res.json(returnArmor);
+    });
   }
 
   /* Returns all armor with an evasion rating >= the amount given

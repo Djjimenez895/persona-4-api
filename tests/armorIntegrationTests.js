@@ -29,7 +29,23 @@ describe('Armor CRUD Tests', () => {
   });
 
   it('Should return armor with defense >= the amount given (/armor/defense/:defenseAmount GET)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor/defense/12')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('defense').above(11);
+        });
+        done();
+      });
+  });
+
+  it('Should return zero armor pieces (defense is too high) (/armor/defense/:defenseAmount GET)', (done) => {
+    agent.get('/api/armor/defense/99999998')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty();
+        done();
+      });
   });
 
   it('Should return all armor since evasion rate given is 0 (/armor/evasion/:evasionAmount GET)', (done) => {
