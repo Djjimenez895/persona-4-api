@@ -21,11 +21,26 @@ describe('Armor CRUD Tests', () => {
   });
 
   it('Should return armor with the given effect type and the give amount (/armor/effect/:effectType/:amount (GET)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor/effect/Strength/1')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('effectType').equal('Strength');
+          element.should.have.property('effectAmount').equal(1);
+        });
+        done();
+      });
   });
 
   it('Should return armor with the given effect type (/armor/effect/:effectType GET)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/armor/effect/Strength')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('effectType').equal('Strength');
+        });
+        done();
+      });
   });
 
   it('Should return armor with defense >= the amount given (/armor/defense/:defenseAmount GET)', (done) => {

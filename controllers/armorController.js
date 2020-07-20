@@ -25,13 +25,6 @@ function armorController(Armor) {
     searchByQuery(query, res);
   }
 
-  /* TODO: Implement a get request (/api/armor/effect/:effectType/:amount URI)
-  that gets all armor with a specific effect type and a specific amount
-  for that effect type */
-  function getByEffectTypeAndAmount(req, res) {
-
-  }
-
   /* Returns all armor with a specific effect type (i.e., strength, luck, etc.)
      given as the argument for the URI /api/armor/effect/:effectType */
   function getByEffectType(req, res) {
@@ -44,6 +37,25 @@ function armorController(Armor) {
 
       const returnArmor = armorPieces.filter((armor) => (armor.effectType === requestedEffectType))
         .map((effectTypeArmor) => effectTypeArmor.toJSON());
+      return res.json(returnArmor);
+    });
+  }
+
+  /* TODO: Implement a get request (/api/armor/effect/:effectType/:amount URI)
+  that gets all armor with a specific effect type and a specific amount
+  for that effect type */
+  function getByEffectTypeAndAmount(req, res) {
+    const requestedEffectType = req.params.effectType;
+    const requestedEffectTypeAmount = parseInt(req.params.amount, 10); // Cast for comparison below
+
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.effectType === requestedEffectType))
+        .filter((armor) => (armor.effectAmount === requestedEffectTypeAmount))
+        .map((effectTypeAndAmountArmor) => effectTypeAndAmountArmor.toJSON());
       return res.json(returnArmor);
     });
   }
