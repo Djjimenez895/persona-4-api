@@ -19,8 +19,7 @@ function armorController(Armor) {
     });
   }
 
-  /* TODO: Implement a get request (/api/armor URI) that returns all
-  armor in the database */
+  /* Returns all armor pieces in the database */
   function get(req, res) {
     const query = {};
     searchByQuery(query, res);
@@ -33,10 +32,20 @@ function armorController(Armor) {
 
   }
 
-  /* TOOD: Implemenet a get request (/api/armor/effect/:effectType URI) that
-  returns all armor with a specific effect type (i.e., strength, luck, etc.) */
+  /* Returns all armor with a specific effect type (i.e., strength, luck, etc.)
+     given as the argument for the URI /api/armor/effect/:effectType */
   function getByEffectType(req, res) {
+    const requestedEffectType = req.params.effectType;
 
+    Armor.find((err, armorPieces) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnArmor = armorPieces.filter((armor) => (armor.effectType === requestedEffectType))
+        .map((effectTypeArmor) => effectTypeArmor.toJSON());
+      return res.json(returnArmor);
+    });
   }
 
   /* Returns all armor with defense >= the amount of defense given
