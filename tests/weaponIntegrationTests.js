@@ -31,8 +31,24 @@ describe('Weapon CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return weapons with an attack >= the attack power given (/weapons/attack/:attackPower GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return zero weapons because the attack value given is 9999999 (/api/weapons/attack/:attackPower GET) ', (done) => {
+    agent.get('/api/weapons/attack/9999999')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty();
+        done();
+      });
+  });
+
+  it('Should return weapons with an attack >= the attack power given (/api/weapons/attack/:attackPower GET) ', (done) => {
+    agent.get('/api/weapons/attack/95')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('attack').above(94);
+        });
+        done();
+      });
   });
 
   it('Should return weapons with a hit rate >= the hit rate given (/api/weapons/hit/:hitRate GET) ', (done) => {

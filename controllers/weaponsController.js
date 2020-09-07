@@ -41,10 +41,21 @@ function weaponsController(Weapon) {
 
   }
 
-  /* TODO: Implement a get request (/api/weapons/attack/:attackPower URI) that returns
-  all weapons with a given attack power or higher */
+  /* Returns all weapons with a given attack power or higher
+  (/api/weapons/attack/:attackPower URI) */
   function getByAttackPower(req, res) {
+    const requestedAttackPower = req.params.attackPower;
 
+    Weapon.find((err, weaponsWithAttackPower) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnWeapons = weaponsWithAttackPower.filter((weapon) => (weapon.attackPower >= requestedAttackPower))
+        .map((weaponWithAttackPower) => weaponWithAttackPower.toJSON());
+      return res.json(returnWeapons);
+    });
   }
 
   /* Returns all weapons with a given hit rate or higher (/api/weapons/hit/:hitRate URI) */
