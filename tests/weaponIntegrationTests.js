@@ -35,7 +35,23 @@ describe('Weapon CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return weapons with a hit rate >= the hit rate given (/weapons/hit/:hitRate GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return weapons with a hit rate >= the hit rate given (/api/weapons/hit/:hitRate GET) ', (done) => {
+    agent.get('/api/weapons/hit/95')
+      .expect(200)
+      .end((err, results) => {
+        results.body.forEach((element) => {
+          element.should.have.property('hit').above(94);
+        });
+        done();
+      });
+  });
+
+  it('Should return no weapons because the hit rate is 120 (/api/weapons/hit/:hitRate GET) ', (done) => {
+    agent.get('/api/weapons/hit/120')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.be.empty();
+        done();
+      });
   });
 });

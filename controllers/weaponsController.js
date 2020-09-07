@@ -47,10 +47,19 @@ function weaponsController(Weapon) {
 
   }
 
-  /* TODO: Implement a get request (/api/weapons/hit/:hitRate URI) that returns
-  all weapons with a given hit rate or higher */
+  /* Returns all weapons with a given hit rate or higher (/api/weapons/hit/:hitRate URI) */
   function getByHitRate(req, res) {
+    const requestedHitRate = req.params.hitRate;
 
+    Weapon.find((err, weaponsWithHitRate) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnWeapons = weaponsWithHitRate.filter((weapon) => (weapon.hit >= requestedHitRate))
+        .map((weaponWithHitRate) => weaponWithHitRate.toJSON());
+      return res.json(returnWeapons);
+    });
   }
 
   return {
