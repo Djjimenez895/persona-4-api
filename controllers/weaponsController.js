@@ -52,7 +52,7 @@ function weaponsController(Weapon) {
       }
 
       // eslint-disable-next-line max-len
-      const returnWeapons = weaponsWithAttackPower.filter((weapon) => (weapon.attackPower >= requestedAttackPower))
+      const returnWeapons = weaponsWithAttackPower.filter((weapon) => (weapon.attack >= requestedAttackPower))
         .map((weaponWithAttackPower) => weaponWithAttackPower.toJSON());
       return res.json(returnWeapons);
     });

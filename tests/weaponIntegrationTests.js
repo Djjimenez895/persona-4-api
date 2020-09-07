@@ -41,11 +41,12 @@ describe('Weapon CRUD Tests', () => {
   });
 
   it('Should return weapons with an attack >= the attack power given (/api/weapons/attack/:attackPower GET) ', (done) => {
-    agent.get('/api/weapons/attack/95')
+    agent.get('/api/weapons/attack/1')
       .expect(200)
       .end((err, results) => {
+        results.body.should.not.be.empty();
         results.body.forEach((element) => {
-          element.should.have.property('attack').above(94);
+          element.should.have.property('attack').above(1);
         });
         done();
       });
