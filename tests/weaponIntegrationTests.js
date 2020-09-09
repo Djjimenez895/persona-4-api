@@ -23,8 +23,16 @@ describe('Weapon CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return weapons related to the given character (/weapons/character/:characterName GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return weapons related to the given character (/api/weapons/character/:characterName GET) ', (done) => {
+    agent.get('/api/weapons/character/chie')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('character').equal('chie');
+        });
+        done();
+      });
   });
 
   it('Should return weapons with the given effect type (i.e., strength) (/weapons/effect/:effectType GET) ', (done) => {

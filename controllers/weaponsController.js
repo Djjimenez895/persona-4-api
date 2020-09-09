@@ -38,7 +38,18 @@ function weaponsController(Weapon) {
   /* TODO: Implement a get request ('/api/weapons/character/:characterName URI) that returns
   all weapons for a given character (i.e., all weapons for Naoto) */
   function getByCharacterName(req, res) {
+    const requestedCharacterName = req.params.characterName;
 
+    Weapon.find((err, weaponsForRequestedCharacter) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnWeapons = weaponsForRequestedCharacter.filter((weapon) => (weapon.character === requestedCharacterName))
+        .map((weaponForRequestedCharacter) => weaponForRequestedCharacter.toJSON());
+      return res.json(returnWeapons);
+    });
   }
 
   /* Returns all weapons with a given attack power or higher
