@@ -19,8 +19,16 @@ describe('Weapon CRUD Tests', () => {
     throw new Error('Needs to be implemented');
   });
 
-  it('Should return weapons (/weapons/price/:priceAmount GET) that have a price <= the one given ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should return weapons (/api/weapons/price/:priceAmount GET) that have the price 3000 or less', (done) => {
+    agent.get('/api/weapons/price/3000')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('price').below(3001);
+        });
+        done();
+      });
   });
 
   it('Should return weapons related to the given character (/api/weapons/character/:characterName GET) ', (done) => {
