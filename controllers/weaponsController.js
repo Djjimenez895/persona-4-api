@@ -29,14 +29,23 @@ function weaponsController(Weapon) {
 
   }
 
-  /* TODO: Implement a get request (/api/weapons/price/:priceAmount URI) that returns
-  all weapons that have the given price or lower */
+  /* Returns all weapons that have the given price or lower (/api/weapons/price/:priceAmount URI) */
   function getByPrice(req, res) {
+    const requestedWeaponPrice = req.params.priceAmount;
 
+    Weapon.find((err, weaponsWithRequestedPrice) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnWeapons = weaponsWithRequestedPrice.filter((weapon) => (weapon.price <= requestedWeaponPrice))
+        .map((weaponForRequestedPrice) => weaponForRequestedPrice.toJSON());
+      return res.json(returnWeapons);
+    });
   }
 
-  /* TODO: Implement a get request ('/api/weapons/character/:characterName URI) that returns
-  all weapons for a given character (i.e., all weapons for Naoto) */
+  /* Returns all weapons for a given character ('/api/weapons/character/:characterName URI) */
   function getByCharacterName(req, res) {
     const requestedCharacterName = req.params.characterName;
 
