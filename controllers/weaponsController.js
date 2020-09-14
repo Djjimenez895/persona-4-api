@@ -16,10 +16,22 @@ function weaponsController(Weapon) {
     });
   }
 
-  /* TODO: Implement a get request (/api/weapons/effect/:effectType URI) that returns all weapons
-  that have the effect type passed as an argument (i.e., strength, luck, agility, etc.) */
+  /* Returns all weapons that have the effect type
+  passed as an argument (i.e., strength, luck, agility, etc.)
+  to the end point (/api/weapons/effect/:effectType URI) */
   function getByEffectType(req, res) {
+    const requestedEffectType = req.params.effectType;
 
+    Weapon.find((err, weaponsWithRequestedEffectType) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnWeapons = weaponsWithRequestedEffectType.filter((weapon) => (weapon.effectType === requestedEffectType))
+        .map((weaponWithRequestedEffectType) => weaponWithRequestedEffectType.toJSON());
+      return res.json(returnWeapons);
+    });
   }
 
   /* TODO: Implement a get request (/api/weapons/effect/:effecType/:amount URI) that returns
@@ -60,6 +72,8 @@ function weaponsController(Weapon) {
       return res.json(returnWeapons);
     });
   }
+
+  // date and time | log level | message
 
   /* Returns all weapons with a given attack power or higher
   (/api/weapons/attack/:attackPower URI) */

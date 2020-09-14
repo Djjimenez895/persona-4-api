@@ -12,7 +12,22 @@ const agent = request.agent(app);
 
 describe('Weapon CRUD Tests', () => {
   it('Should return all weapons in the database (/weapons GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/weapons')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('name');
+          element.should.have.property('effectType');
+          element.should.have.property('effectAmount');
+          element.should.have.property('description');
+          element.should.have.property('attack');
+          element.should.have.property('hit');
+          element.should.have.property('price');
+          element.should.have.property('character');
+        });
+        done();
+      });
   });
 
   it('Should return weapons (/weapons/effect/:effecType/:amount GET) that have the specified effect type and the given amount (i.e., +2 strength)', (done) => {
@@ -43,8 +58,16 @@ describe('Weapon CRUD Tests', () => {
       });
   });
 
-  it('Should return weapons with the given effect type (i.e., strength) (/weapons/effect/:effectType GET) ', (done) => {
-    throw new Error('Needs to be implemented');
+  it('Should only return weapons that buff strength (i.e., strength) (/weapons/effect/:effectType GET) ', (done) => {
+    agent.get('/api/weapons/effect/Strength')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('effectType').equal('Strength');
+        });
+        done();
+      });
   });
 
   it('Should return zero weapons because the attack value given is 9999999 (/api/weapons/attack/:attackPower GET) ', (done) => {
