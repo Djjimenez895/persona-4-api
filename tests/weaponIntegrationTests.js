@@ -31,7 +31,16 @@ describe('Weapon CRUD Tests', () => {
   });
 
   it('Should return weapons (/weapons/effect/:effecType/:amount GET) that have the specified effect type and the given amount (i.e., +2 strength)', (done) => {
-    throw new Error('Needs to be implemented');
+    agent.get('/api/weapons/effect/Strength/1')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('effectType').equal('Strength');
+          element.should.have.property('effectAmount').equal(1);
+        });
+        done();
+      });
   });
 
   it('Should return weapons (/api/weapons/price/:priceAmount GET) that have the price 3000 or less', (done) => {

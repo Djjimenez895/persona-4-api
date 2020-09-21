@@ -34,11 +34,26 @@ function weaponsController(Weapon) {
     });
   }
 
-  /* TODO: Implement a get request (/api/weapons/effect/:effecType/:amount URI) that returns
+  /* TODO: Implement a get request (/api/weapons/effect/:effectType/:amount URI) that returns
   all weapons that have the given effect type (i.e., strength, luck, etc.) and the amount
   (+1, +2. etc.) */
   function getByEffectTypeAndEffectAmount(req, res) {
+    const requestedEffectType = req.params.effectType;
+    const requestedEffectAmount = req.params.amount;
 
+    Weapon.find((err, weaponsWithRequestedEffectTypeAndAmount) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnWeaponsWithEffectType = weaponsWithRequestedEffectTypeAndAmount.filter((weapon) => (weapon.effectType === requestedEffectType));
+      // eslint-disable-next-line max-len
+      const returnWeaponsWithEffectTypeAndAmount = returnWeaponsWithEffectType.filter((filteredWeapon) => (filteredWeapon.effectAmount <= requestedEffectAmount))
+      // eslint-disable-next-line max-len
+        .map((weaponWithRequestedEffectTypeAndAmount) => weaponWithRequestedEffectTypeAndAmount.toJSON());
+      return res.json(returnWeaponsWithEffectTypeAndAmount);
+    });
   }
 
   /* Returns all weapons that have the given price or lower (/api/weapons/price/:priceAmount URI) */

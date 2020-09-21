@@ -9,7 +9,7 @@ function routes(Weapon) {
     .get(controller.get);
 
   // Check if you can ping this
-  weaponRouter.route('/weapons/effect/:effecType/:amount')
+  weaponRouter.route('/weapons/effect/:effectType/:amount')
     .get(controller.getByEffectTypeAndEffectAmount);
 
   weaponRouter.route('/weapons/price/:priceAmount')
