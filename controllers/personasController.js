@@ -55,7 +55,22 @@ function personasController(Persona) {
   /* TODO: Implement a get request (/api/personas/:name URI) that returns
   all personas with the given prefix in their name */
   function getByNamePrefix(req, res) {
+    let prefix = '';
 
+    if (req.params.name) {
+      prefix = req.params.name;
+      prefix.replace('-', ' ');
+    }
+
+    Persona.find((err, personas) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      const returnPersonas = personas.filter((persona) => (persona.name.startsWith(prefix)))
+        .map((prefixedPersona) => prefixedPersona.toJSON());
+      return res.json(returnPersonas);
+    });
   }
 
   return {

@@ -51,7 +51,16 @@ describe('Persona CRUD Tests', () => {
     throw new Error('Must be implemented');
   });
 
-  it('Should return all personas that have the given prefix in their name (/personas/:name GET)', (done) => {
-    throw new Error('Must be implemented');
+  it('Should return all personas that have the given prefix in their name (/api/personas/:name GET)', (done) => {
+    agent.get('/api/personas/Test')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('name');
+          element.name.should.startWith('Test');
+        });
+        done();
+      });
   });
 });
