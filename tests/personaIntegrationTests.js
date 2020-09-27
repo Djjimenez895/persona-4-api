@@ -19,8 +19,16 @@ describe('Persona CRUD Tests', () => {
     throw new Error('Must be implemented');
   });
 
-  it('Should get all Personas that start at the given starting level (/personas/level/:startingLevel GET)', (done) => {
-    throw new Error('Must be implemented');
+  it('Should get all Personas that start at the given starting level (/api/personas/level/:startingLevel GET)', (done) => {
+    agent.get('/api/personas/level/12')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('level').equal(12);
+        });
+        done();
+      });
   });
 
   it('Should return all personas with the given weakness (/personas/weakness/:weaknessType GET)', (done) => {

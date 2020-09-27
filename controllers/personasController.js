@@ -5,9 +5,20 @@ function personasController(Persona) {
   }
 
   /* TODO: Implement a get request (/api/personas/level/:startingLevel URI) that gets all personas
-  that start at the given level */
+  that start at the given level or lower */
   function getByStartingLevel(req, res) {
+    const requestedStartingLevel = req.params.startingLevel;
 
+    Persona.find((err, personasWithRequestedStartingLevel) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnPersonas = personasWithRequestedStartingLevel.filter((persona) => (persona.level <= requestedStartingLevel))
+        .map((personaWithRequestedStartingLevel) => personaWithRequestedStartingLevel.toJSON());
+      return res.json(returnPersonas);
+    });
   }
 
   /* TODO: Implement a get request (/api/personas/weakness/:weaknessType URI) that returns all
