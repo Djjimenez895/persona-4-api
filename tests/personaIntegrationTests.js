@@ -15,10 +15,6 @@ describe('Persona CRUD Tests', () => {
     throw new Error('Must be implemented');
   });
 
-  it('Should successfully add a new Persona to the database (POST Request)', (done) => {
-    throw new Error('Must be implemented');
-  });
-
   it('Should get all Personas that start at the given starting level (/api/personas/level/:startingLevel GET)', (done) => {
     agent.get('/api/personas/level/12')
       .expect(200)
@@ -52,7 +48,15 @@ describe('Persona CRUD Tests', () => {
   });
 
   it('Should return all personas of the given Arcana (/personas/arcana/:arcanaName GET)', (done) => {
-    throw new Error('Must be implemented');
+    agent.get('/api/personas/arcana/Sun')
+      .expect(200)
+      .end((err, results) => {
+        results.body.should.not.be.empty();
+        results.body.forEach((element) => {
+          element.should.have.property('arcana').equal('Sun');
+        });
+        done();
+      });
   });
 
   it('Should return all personas that can learn the skill with the given name (/personas/skill/:skillName GET)', (done) => {

@@ -4,8 +4,8 @@ function personasController(Persona) {
 
   }
 
-  /* TODO: Implement a get request (/api/personas/level/:startingLevel URI) that gets all personas
-  that start at the given level or lower */
+  /*  Returns all personas that start at the given
+      level or lower (/api/personas/level/:startingLevel URI) */
   function getByStartingLevel(req, res) {
     const requestedStartingLevel = req.params.startingLevel;
 
@@ -51,10 +51,20 @@ function personasController(Persona) {
 
   }
 
-  /* TODO: Implement a get request (/api/personas/arcana/:arcanaName URI) that
-  returns all the personas that are of the given arcana */
+  /* Returns all the personas that are of the given arcana (/api/personas/arcana/:arcanaName URI) */
   function getByArcana(req, res) {
+    const requestedArcana = req.params.arcanaName;
 
+    Persona.find((err, personasWithRequestedArcana) => {
+      if (err) {
+        return res.send(err);
+      }
+
+      // eslint-disable-next-line max-len
+      const returnPersonas = personasWithRequestedArcana.filter((persona) => (persona.arcana === requestedArcana))
+        .map((personaWithRequestedArcana) => personaWithRequestedArcana.toJSON());
+      return res.json(returnPersonas);
+    });
   }
 
   /* TODO: Implement a get request (/api/personas/skill/:skillName URI) that returns
