@@ -1,7 +1,25 @@
 function personasController(Persona) {
-  /* TODO: Implement a get request (/api/personas URI) that returns all personas in the database */
-  function get(req, res) {
+  function searchByQuery(query, res) {
+    Persona.find(query, (err, items) => {
+      if (err) {
+        return res.send(err);
+      }
+      const returnItems = items.map((item) => {
+        const newItem = item.toJSON();
+        return newItem;
+      });
+      return res.json(returnItems);
+    });
+  }
 
+  /* Get all the personas in the database */
+  function get(req, res) {
+    const query = {};
+    if (req.query.name) {
+      query.name = req.query.name;
+    }
+
+    searchByQuery(query, res);
   }
 
   /*  Returns all personas that start at the given

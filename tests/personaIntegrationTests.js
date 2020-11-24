@@ -12,7 +12,12 @@ const agent = request.agent(app);
 
 describe('Persona CRUD Tests', () => {
   it('Should return all personas in the database (/personas GET)', (done) => {
-    throw new Error('Must be implemented');
+    agent.get('/api/personas')
+      .expect(200)
+      .end((err, results) => {
+        results.body.length.should.be.above(0); // Should get something back
+        done();
+      });
   });
 
   it('Should get all Personas that start at the given starting level (/api/personas/level/:startingLevel GET)', (done) => {
