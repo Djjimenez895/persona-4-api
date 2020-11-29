@@ -12,4 +12,4 @@ const accessoryModel = new Schema(
   },
 );
 
-module.exports = mongoose.model('Accessory', accessoryModel);
+module.exports = mongoose.model('Accessory', accessoryModel, 'accessories');

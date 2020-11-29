@@ -11,15 +11,13 @@ const Accessory = mongoose.model('Accessory');
 const agent = request.agent(app);
 
 describe('Accessory CRUD Tests', () => {
-  it('Should return all accessories in the test database (/api/accessories GET request)', (done) => {
-    // get function isn't implemented yet, so leave this commented until it's implemented.
-    // agent.get('/api/accessories')
-    //   .expect(200)
-    //   .end((err, results) => {
-    //     results.body.length.should.be.above(0);
-    //     done();
-    //   });
-    throw new Error('Needs to be implemented');
+  it('Should return all skills in the database (/api/skills GET) ', (done) => {
+    agent.get('/api/accessories')
+      .expect(200)
+      .end((err, results) => {
+        results.body.length.should.be.above(0); // Should get something back
+        done();
+      });
   });
 
   it('Should return accessories that have the given effect and the specified amount (/accessories/effect/:effectType/:amount GET)', (done) => {

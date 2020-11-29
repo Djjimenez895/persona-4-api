@@ -1,8 +1,25 @@
 function accessoriesController(Accessory) {
-  /* TODO: Implement a get request (/api/accessories URI) that
-  returns all accessories in the database. */
-  function get(req, res) {
+  function searchByQuery(query, res) {
+    Accessory.find(query, (err, items) => {
+      if (err) {
+        return res.send(err);
+      }
+      const returnItems = items.map((item) => {
+        const newItem = item.toJSON();
+        return newItem;
+      });
+      return res.json(returnItems);
+    });
+  }
 
+  /* Return all accessories in the database (/api/accessories URI) */
+  function get(req, res) {
+    const query = {};
+    if (req.query.name) {
+      query.name = req.query.name;
+    }
+
+    searchByQuery(query, res);
   }
 
   /* TODO: Implement a get request (/api/accessories/effect/:effectType/:amount URI) that gets
